@@ -47,6 +47,7 @@
             var simple = notCacher.map(o => {
                 return {
                     method: o.method,
+                    url: o.url,
                     pathname: new URL(o.url).pathname + new URL(o.url).search,
                     host: new URL(o.url).host
                 }
@@ -65,13 +66,16 @@
                     eMoldino: o.host && o.host.includes('emoldino.com') ? 'Y' : 'N',
 
                     Count: pathCount[key],
+                    'Call From':'',
+                    Comment: o.url,
                     method: o.method,
                     // ...o,
                 }
             });
+
             let res = [];
             simple.forEach(o => {
-                if (pathCount[o.API] > 1) {
+                if (pathCount[o.API] > 0) {
                     res.push(o);
                     pathCount[o.API] = 0;
                 }
